@@ -5,7 +5,6 @@ namespace musingo_auth_service.Models;
 
 public class User
 {
-    [BsonIgnore]
     [BsonId]
     [BsonElement("_id")]
     public ObjectId Id { get; set; }
