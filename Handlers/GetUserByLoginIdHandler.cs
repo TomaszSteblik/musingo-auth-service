@@ -7,24 +7,24 @@ using musingo_auth_service.Queries;
 
 namespace musingo_auth_service.Handlers;
 
-public class GetUserHandler : IRequestHandler<GetUserQuery,UserReadDto>
+public class GetUserByLoginIdHandler : IRequestHandler<GetUserByLoginIdQuery,UserReadDto>
 {
     private readonly IMapper _mapper;
     private readonly IMongoClient _mongoClient;
 
-    public GetUserHandler(IMongoClient mongoClient, IMapper mapper)
+    public GetUserByLoginIdHandler(IMongoClient mongoClient, IMapper mapper)
     {
         _mongoClient = mongoClient;
         _mapper = mapper;
     }
     
-    public async Task<UserReadDto> Handle(GetUserQuery request, CancellationToken cancellationToken)
+    public async Task<UserReadDto> Handle(GetUserByLoginIdQuery request, CancellationToken cancellationToken)
     {
-        var userId = request.UserId;
+        var loginId = request.LoginId;
 
         var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
 
-        var user = await (await users.FindAsync("{}")).FirstOrDefaultAsync();
+        var user = await (await users.FindAsync(user => user.LoginId == loginId)).FirstOrDefaultAsync();
 
         return _mapper.Map<UserReadDto>(user);
     }

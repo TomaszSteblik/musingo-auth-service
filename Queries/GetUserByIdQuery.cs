@@ -3,11 +3,11 @@ using musingo_auth_service.Dtos;
 
 namespace musingo_auth_service.Queries;
 
-public class GetUserQuery : IRequest<UserReadDto>
+public class GetUserByIdQuery : IRequest<UserReadDto>
 {
     public Guid UserId { get; init; }
 
-    public GetUserQuery(Guid userId)
+    public GetUserByIdQuery(Guid userId)
     {
         UserId = userId;
     }

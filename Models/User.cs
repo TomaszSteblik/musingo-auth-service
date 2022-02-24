@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -7,6 +8,7 @@ public class User
 {
     [BsonId]
     [BsonElement("_id")]
+    [JsonPropertyName("_id")]
     public ObjectId Id { get; set; }
     [BsonElement("userId")]
     public Guid UserId { get; set; }
