@@ -1,6 +1,7 @@
 using System.Reflection;
 using MediatR;
 using MongoDB.Driver;
+using musingo_auth_service.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IMongoClient>(new MongoClient(builder.Configuration.GetConnectionString("mongoDb")));
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddScoped<IUsersRepository,UsersRepository>();
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using MongoDB.Driver;
+using musingo_auth_service.Data;
 using musingo_auth_service.Dtos;
 using musingo_auth_service.Models;
 using musingo_auth_service.Queries;
@@ -9,12 +10,12 @@ namespace musingo_auth_service.Handlers;
 
 public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery,UserReadDto>
 {
+    private readonly IUsersRepository _usersRepository;
     private readonly IMapper _mapper;
-    private readonly IMongoClient _mongoClient;
 
-    public GetUserByIdHandler(IMongoClient mongoClient, IMapper mapper)
+    public GetUserByIdHandler(IUsersRepository usersRepository, IMapper mapper)
     {
-        _mongoClient = mongoClient;
+        _usersRepository = usersRepository;
         _mapper = mapper;
     }
     
@@ -22,9 +23,7 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery,UserReadDto>
     {
         var userId = request.UserId;
 
-        var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
-
-        var user = await (await users.FindAsync(user => user.UserId == userId)).FirstOrDefaultAsync();
+        var user = await _usersRepository.GetUserById(userId);
 
         return _mapper.Map<UserReadDto>(user);
     }
