@@ -24,7 +24,7 @@ public class RegisterUserHandler : INotificationHandler<RegisterUserNotification
 
         var user = _mapper.Map<User>(request.UserLoginDto);
 
-        await _usersRepository.AddNewUser(user);
+        await _usersRepository.AddNewUserAsync(user);
 
     }
 }

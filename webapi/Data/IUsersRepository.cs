@@ -4,8 +4,8 @@ namespace musingo_auth_service.Data;
 
 public interface IUsersRepository
 {
-    Task AddNewUser(User user);
-    Task<User> GetUserByLoginId(string loginId);
-    Task<User> GetUserById(Guid userId);
-    Task<bool> UpdateUser(User user);
+    Task AddNewUserAsync(User user);
+    Task<User> GetUserByLoginIdAsync(string loginId);
+    Task<User> GetUserByIdAsync(Guid userId);
+    Task<bool> UpdateUserAsync(User user);
 }

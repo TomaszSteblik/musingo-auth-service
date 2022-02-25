@@ -23,7 +23,7 @@ public class GetUserByLoginIdHandler : IRequestHandler<GetUserByLoginIdQuery,Use
     {
         var loginId = request.LoginId;
 
-        var user = await _usersRepository.GetUserByLoginId(loginId);
+        var user = await _usersRepository.GetUserByLoginIdAsync(loginId);
 
         return _mapper.Map<UserReadDto>(user);
     }
