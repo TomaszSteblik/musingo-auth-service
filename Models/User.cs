@@ -20,4 +20,6 @@ public class User
     public string Name { get; set; }
     [BsonElement("averageScore")]
     public double AverageScore { get; set; }
+    [BsonElement("token")]
+    public string Token { get; set; }
 }

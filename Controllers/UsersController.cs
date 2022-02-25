@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using musingo_auth_service.Commands;
 using musingo_auth_service.Dtos;
 using musingo_auth_service.Notifications;
 using musingo_auth_service.Queries;
@@ -29,7 +30,14 @@ public class UsersController : ControllerBase
             await _mediator.Publish(notification);
         }
 
-        return Ok(await _mediator.Send(query));
+        var tokenRefreshCommand = new RefreshUserTokenCommand(userLoginDto.LoginId);
+        var jwt = await _mediator.Send(tokenRefreshCommand);
+
+        return Ok(new
+        {
+            user = await _mediator.Send(query), 
+            token = jwt
+        });
 
     }
 

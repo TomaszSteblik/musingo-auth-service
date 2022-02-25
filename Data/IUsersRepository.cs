@@ -7,4 +7,5 @@ public interface IUsersRepository
     Task AddNewUser(User user);
     Task<User> GetUserByLoginId(string loginId);
     Task<User> GetUserById(Guid userId);
+    Task<bool> UpdateUser(User user);
 }
