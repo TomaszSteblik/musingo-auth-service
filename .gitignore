@@ -1,3 +1,4 @@
 /.idea/
-/bin/
-/obj/
+/webapi/bin/
+/webapi/obj/
+.DS_STORE
