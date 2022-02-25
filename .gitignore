@@ -2,3 +2,6 @@
 /webapi/bin/
 /webapi/obj/
 .DS_STORE
+/musingo-auth-tests/bin/
+/musingo-auth-tests/obj/
+/webapi/.DS_Store
