@@ -25,7 +25,7 @@ public class RefreshUserTokenHandler : IRequestHandler<RefreshUserTokenCommand,s
         var securityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(key));
         var credentials = new SigningCredentials(securityKey,SecurityAlgorithms.HmacSha256);
         
-        var user = await _usersRepository.GetUserByLoginId(request.LoginId);
+        var user = await _usersRepository.GetUserByLoginIdAsync(request.LoginId);
 
         var permClaims = new List<Claim>();
         permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()));
@@ -41,7 +41,7 @@ public class RefreshUserTokenHandler : IRequestHandler<RefreshUserTokenCommand,s
         user.Token = jwtToken;
         
         //TODO: Handle or log if error - returns false
-        await _usersRepository.UpdateUser(user);
+        await _usersRepository.UpdateUserAsync(user);
         
         return jwtToken;
     }

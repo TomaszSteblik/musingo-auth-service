@@ -23,7 +23,7 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery,UserReadDto>
     {
         var userId = request.UserId;
 
-        var user = await _usersRepository.GetUserById(userId);
+        var user = await _usersRepository.GetUserByIdAsync(userId);
 
         return _mapper.Map<UserReadDto>(user);
     }

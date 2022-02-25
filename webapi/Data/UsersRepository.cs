@@ -15,7 +15,7 @@ public class UsersRepository : IUsersRepository
     }
 
 
-    public async Task AddNewUser(User user)
+    public async Task AddNewUserAsync(User user)
     {
         var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
 
@@ -24,21 +24,21 @@ public class UsersRepository : IUsersRepository
 
     }
 
-    public async Task<User> GetUserByLoginId(string loginId)
+    public async Task<User> GetUserByLoginIdAsync(string loginId)
     {
         var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
 
         return await (await users.FindAsync(user => user.LoginId == loginId)).FirstOrDefaultAsync();
     }
 
-    public async Task<User> GetUserById(Guid userId)
+    public async Task<User> GetUserByIdAsync(Guid userId)
     {
         var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
 
         return await (await users.FindAsync(user => user.UserId == userId)).FirstOrDefaultAsync();
     }
 
-    public async Task<bool> UpdateUser(User user)
+    public async Task<bool> UpdateUserAsync(User user)
     {
         var users = _mongoClient.GetDatabase("usersDb").GetCollection<User>("users");
         
